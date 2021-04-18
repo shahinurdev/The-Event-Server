@@ -97,6 +97,13 @@ app.delete('/deleteService/:id',(req, res) =>{
     })
 })
 
+app.get('/isAdmin', (req, res) => {
+    const email = req.body.email;
+    AdminCollection.find({ email: email })
+        .toArray((err, admin) => {
+            res.send(admin.length > 0);
+        })
+})
 
         console.log('connect');
        
