@@ -83,6 +83,13 @@ app.get('/bookingList', (req, res) => {
         })
 });
 
+app.get('/testimonials', (req, res) => {
+    reviewCollection.find({})
+        .toArray((err, documents) => {
+            res.send(documents);
+        })
+});
+
 app.delete('/deleteService/:id',(req, res) =>{
     ServicesCollection.deleteOne({_id:ObjectId(req.params.id)})
    .then(result=>{
