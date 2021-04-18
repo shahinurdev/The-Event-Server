@@ -31,6 +31,7 @@ client.connect(err => {
   const ServicesCollection = client.db("theEvent").collection("services");
   const ordersCollection = client.db("theEvent").collection("orderPlace");
   const AdminCollection = client.db("theEvent").collection("allAdmin");
+  const  reviewCollection = client.db("theEvent").collection("allReview");
   app.post('/addServices',(req,res)=>{
     const file = req.files.file;
         const title = req.body.title;
@@ -96,12 +97,20 @@ app.delete('/deleteService/:id',(req, res) =>{
         res.send(result.insertedCount > 0)
     })
 })
+ app.post("/review",(req, res) =>{
+    const review = req.body;
+    reviewCollection.insertOne(review)
+    .then(result=>{
+        res.send(result.insertedCount > 0)
+    })
+})
 
 app.get('/isAdmin', (req, res) => {
     const email = req.body.email;
-    AdminCollection.find({ email: email })
+    AdminCollection.find({email: email })
         .toArray((err, admin) => {
             res.send(admin.length > 0);
+            console.log(err);
         })
 })
 
