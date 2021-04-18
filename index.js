@@ -32,6 +32,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   const ServicesCollection = client.db("theEvent").collection("services");
   const ordersCollection = client.db("theEvent").collection("orderPlace");
+  const AdminCollection = client.db("theEvent").collection("allAdmin");
   app.post('/addServices',(req,res)=>{
     const file = req.files.file;
         const title = req.body.title;
@@ -89,6 +90,15 @@ app.delete('/deleteService/:id',(req, res) =>{
      res.send(result.deletedCount > 0)
    })
  })
+
+ app.post("/makeAdmin",(req, res) =>{
+    const email = req.body;
+    AdminCollection.insertOne(email)
+    .then(result=>{
+        res.send(result.insertedCount > 0)
+    })
+})
+
 
         console.log('connect');
        
