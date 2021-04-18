@@ -11,8 +11,6 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 require('dotenv').config();
 console.log(process.env.DB_USER,process.env.DB_PASS);
 
-// app.use(bodyParser.json({limit: "50mb"}));
-// app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 const app = express()
 
 app.use(express.static('services'));
