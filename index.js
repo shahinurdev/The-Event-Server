@@ -77,7 +77,7 @@ app.get('/Allbook/:id',(req, res) =>{
 })
 
 app.get('/bookingList', (req, res) => {
-    ordersCollection.find({email: req.query.email})
+    ordersCollection.find({})
         .toArray((err, documents) => {
             res.send(documents);
         })
